@@ -5,8 +5,6 @@ import Session from "./Session"
 import Controls from "./Controls"
 import Button from "./Button"
 
-
-
 function Pomodoro() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [session, setSession] = useState("Focusing");
@@ -18,18 +16,17 @@ function Pomodoro() {
   const [controlsDisabled, setControlsDisabled] = useState(false)
   const audio = new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`)
   
-  
   useInterval(() => {
     setRemainingTime(remainingTime - 1)
     if(remainingTime <= 0) {
       audio.play()
     if(session === "Focusing") {
       setSession("On Break")
-      setRemainingTime(breakDuration * 60)
+      setRemainingTime(breakDuration => breakDuration * 60)
     } else if 
       (session === "On Break") {
       setSession("Focusing")
-      setRemainingTime(focusDuration * 60)
+      setRemainingTime(focusDuration => focusDuration * 60)
       }
     }
   },
@@ -60,7 +57,7 @@ const playPause = () => {
       <Controls focusDuration={focusDuration} setFocusDuration={setFocusDuration} setBreakDuration={setBreakDuration} setRemainingTime={setRemainingTime} breakDuration={breakDuration} controlsDisabled={controlsDisabled}/>
       <Button playPause={playPause} isTimerRunning={isTimerRunning} handleReset={handleReset} stopDisabled={stopDisabled} classNames={classNames}/>
       <Session session={session} focusDuration={focusDuration} breakDuration={breakDuration} isStopped={isStopped} remainingTime={remainingTime} isTimerRunning={isTimerRunning} />
-      <audio src={audio} type="audio/mp3"></audio>
+      <audio src={audio} type="audio/mp3" />
     </div>
   );
 }
