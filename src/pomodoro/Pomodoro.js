@@ -22,11 +22,11 @@ function Pomodoro() {
       audio.play()
     if(session === "Focusing") {
       setSession("On Break")
-      setRemainingTime(breakDuration => breakDuration * 60)
+      setRemainingTime(breakDuration * 60)
     } else if 
       (session === "On Break") {
       setSession("Focusing")
-      setRemainingTime(focusDuration => focusDuration * 60)
+      setRemainingTime(focusDuration * 60)
       }
     }
   },
